@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull Image'){
+            steps {
+                docker pull redaloukil/test-react
+            
+            }
+        }
+        stage('Linting') {
+            steps {
+                
+            }
+        }
+        stage('Testing') {
+            steps {
+                
+            }
+        }
+        stage('Deploy aws'){
+            steps {
+
+            }
+        }
+    }
+}
