@@ -10,10 +10,9 @@ app = Flask(__name__)
 def hello_world():
     return jsonify(message="Helllo world")
 
-
 @app.route('/<username>')
 def show_user_profile(username):
-    return jesonify()
+    return jsonify(message="good choice" , username=ume)
 
 
-app.run('localhost' , 8000)
+app.run('0.0.0.0' , 8000)
