@@ -1,16 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Lint') {
+        stage('Linting HTML') {
             steps {
-                sh 'yarn test:lint'
-            }
-        }
-        stage('Deploy in registry'){
-            steps {
-                sh 'docker build
-                sh 'docker push redaloukil/frontend'
+                sh 'echo hello world'
             }
         }
     }
-}
+}%  
