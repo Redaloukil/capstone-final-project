@@ -1,0 +1,27 @@
+version: 3
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: frontend
+    ports:
+      - "8000:8080"
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - app-network  
