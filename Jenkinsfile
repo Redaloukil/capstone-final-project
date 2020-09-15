@@ -1,10 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Linting HTML') {
+        stage('Lint') {
             steps {
                 sh 'echo hello world'
             }
         }
+        stage('Registry deploy') {
+            steps {
+                sh 'echo hello world'
+            }
+        }
+        stage('Aws kubernetes deploy') {
+            steps {
+                sh 'echo hello world'
+            }
+        }
+
     }
 }
