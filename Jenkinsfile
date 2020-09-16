@@ -14,11 +14,7 @@ pipeline {
                 sh 'ls'
             }
         }
-        stage('Lint'){
-            steps {
-                sh 'npm run test:lint'
-            }
-        }
+        
         stage('Lint') {
             steps {
                 sh 'npm run test:lint'
