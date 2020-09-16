@@ -1,11 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('Env setup'){
+            image 'node:12-alpine' 
+            args '-p 3000:3000'
+        }
+        stage('packages Installation'){
+            sh 'npm install'
+        }
         stage('Lint') {
             steps {
-                sh 'echo hello world'
-                sh 'cd ./frontend'
-                sh 'yarn test:lint'
+                sh 'npm run test:lint'
             }
         }
         stage('Push Image') {
