@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'redaloukil/frontend'
             args '-p 3000:3000'
         }
     }
@@ -9,9 +9,13 @@ pipeline {
         CI = 'true'
     }
     stages {
+        stage('see file system'){
+            steps {
+                sh 'ls'
+            }
+        }
         stage('packages Installation'){
             steps {
-                sh 'cd ./frontend'
                 sh 'npm install'
             }
         }
