@@ -14,9 +14,9 @@ pipeline {
                 sh 'ls'
             }
         }
-        stage('packages Installation'){
+        stage('Lint'){
             steps {
-                sh 'npm install'
+                sh 'npm run test:lint'
             }
         }
         stage('Lint') {

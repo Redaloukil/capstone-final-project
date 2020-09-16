@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test:lint": "eslint --max-warnings=0 src/ --ext .js",
+    "test:lint": "eslint --max-warnings=10 src/ --ext .js",
     "test:pretty": "prettier \"src/**/*.js\"",
     "test:unit": "react-scripts test -",
     "build": "react-scripts build",
