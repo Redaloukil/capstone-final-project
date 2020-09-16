@@ -9,11 +9,7 @@ pipeline {
                 sh 'ls'
             }
         }
-        stage('Build'){
-            steps {
-                sh 'docker build -t frontend .'
-            }
-        }
+        
 
         stage('Lint') {
             steps {
@@ -21,10 +17,22 @@ pipeline {
             }
         }
 
+        stage('Build'){
+            steps {
+                sh 'docker build -t frontend .'
+            }
+        }
+        
+        stage('Deploy'){
+            steps {
+                sh 'docker push redaloukil/frontend:latest'
+            }
+        }
+
         stage('Deploy') {
             steps {
-                withCredentials([[$class: 'kubernetes', credentialsId: 'frontend-deploy', usernameVariable: 'AKIAIZ2QY5O5EWYJJDYA', passwordVariable: '5gMr+XBYXLewHUDdDOzl0lWC3c9Q8llO5zwqou++']]) {
-                    AWS("--region=eu-west-1 s3 ls")
+                withCredentials([[$class: 'kubernetes', credentialsId: 'frontend-deploy']) {
+                    AWS("eksctl create cluster — name cluster — version 1.16 — nodegroup-name standard-workers — node-type t2.small — nodes 3 — nodes-min 1 — nodes-max 4 — node-ami auto — region us-west-2")
                 }          
             }
         }
