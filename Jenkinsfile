@@ -27,13 +27,7 @@ pipeline {
                 sh 'echo hello world'
             }
         }
-
-      }
-    }
-
-    stage('Aws kubernetes deploy') {
-      steps {
-        sh 'echo hello world'
-      }
     }
 }
+
+   
