@@ -2,11 +2,16 @@ pipeline {
     agent any
     stages {
         stage('Env setup'){
-            image 'node:12-alpine' 
-            args '-p 3000:3000'
+            steps {
+                image 'node:12-alpine' 
+                args '-p 3000:3000'
+            }
+            
         }
         stage('packages Installation'){
-            sh 'npm install'
+            steps {
+                sh 'npm install'
+            }
         }
         stage('Lint') {
             steps {
