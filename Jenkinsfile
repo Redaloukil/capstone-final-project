@@ -9,6 +9,11 @@ pipeline {
                 sh 'ls'
             }
         }
+        stage('Build'){
+            steps {
+                sh 'docker build -t frontend .'
+            }
+        }
 
         stage('Lint') {
             steps {
@@ -18,7 +23,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'aws s3 ls'
+                withCredentials([[$class: 'kubernetes', credentialsId: 'frontend-deploy', usernameVariable: 'AKIAIZ2QY5O5EWYJJDYA', passwordVariable: '5gMr+XBYXLewHUDdDOzl0lWC3c9Q8llO5zwqou++']]) {
+                    AWS("--region=eu-west-1 s3 ls")
+                }          
             }
         }
 
