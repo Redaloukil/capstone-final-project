@@ -1,20 +1,23 @@
 pipeline {
+    agent {
+        docker {
+            image 'redaloukil/frontend'
+            args '-p 3000:3000'
+        }
+    }
     environment {
         CI = 'true'
     }
     stages {
-        stage('Build Image'){
-            docker build -t frontend .
-        }
         stage('Lint') {
             steps {
-                sh 'docker'
+                sh 'npm run test:lint'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh ''
+                sh 'aws s3 ls'
             }
         }
 
