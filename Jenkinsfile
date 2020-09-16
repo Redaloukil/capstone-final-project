@@ -1,7 +1,4 @@
 pipeline {
-    environment {
-        
-    }
     agent any
     stages {
         stage('Lint') {
