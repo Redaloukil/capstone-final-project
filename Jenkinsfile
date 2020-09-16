@@ -28,5 +28,14 @@ pipeline {
             }
         }
 
+      }
     }
+
+    stage('Aws kubernetes deploy') {
+      steps {
+        sh 'echo hello world'
+      }
+    }
+
+  }
 }
