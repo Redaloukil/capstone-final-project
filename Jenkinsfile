@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  
+  environment {
+    CI = 'true'
+  }
+  
   stages {
     stage('Install') {
       steps {
@@ -22,16 +27,15 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'docker build -t frontend .'
+        dockerImage = docker.build("redaloukil/frontend:latest")
       }
     }
 
     stage('Push Image To Dockerhub') {
       steps {
-        withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'pipeline', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
+    docker.withRegistry('https://registry-1.docker.io/v2/', 'pipeline') {
           sh '''
-                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        docker push redaloukil/frontend:latest
+                dockerImage.push()
             '''
         }
 
@@ -40,12 +44,9 @@ pipeline {
 
     stage('Kubernetes deploy') {
       steps {
-        sh 'echo deploy'
+        sh 'minikube start'
+        sh 'kubectl apply -f ./k8s/deployment.yml'
       }
     }
-
-  }
-  environment {
-    CI = 'true'
   }
 }
