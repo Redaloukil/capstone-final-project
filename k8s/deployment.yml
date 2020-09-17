@@ -6,7 +6,7 @@ metadata:
     type: create-react-app
     language: js
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       type: create-react-app
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: "redaloukil/frontend"
+        image: "redaloukil/frontend:latest"
         readinessProbe:
           httpGet:
             path: /
@@ -28,3 +28,16 @@ spec:
           httpGet:
             path: /
             port: 3000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    nodePort: 30007
+  selector:
+    type: create-react-app
