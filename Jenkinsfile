@@ -28,11 +28,11 @@ pipeline {
 
     stage('Push Image To Dockerhub') {
       steps {
-        withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'myRegistry', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
+        withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'pipeline', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
           sh '''
                         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                         docker push redaloukil/frontend:latest
-                    '''
+            '''
         }
 
       }
