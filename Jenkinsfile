@@ -12,6 +12,7 @@ pipeline {
         stage('Lint') {
             steps {
                 sh 'npm run test:lint'
+                sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
             }
         }
 
