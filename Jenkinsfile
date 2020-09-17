@@ -4,6 +4,9 @@ pipeline {
         CI = 'true'
     }
     stages {
+        stage('Install'){
+            sh 'npm install'
+        }
         stage('Lint') {
             steps {
                 sh 'npm run test:lint'
